@@ -1,0 +1,68 @@
+import json
+import boto3
+import logging
+import requests
+from botocore.exceptions import ClientError
+import datetime
+from datetime import date, timedelta
+
+queue_url = 'https://sqs.us-east-1.amazonaws.com/942877294827/crimemetadataqueue'
+host = 'https://cloudproj.es.us-east-1.aws.found.io/'
+sqsclient = boto3.client('sqs')
+
+logger = logging.getLogger()
+logger.setLevel(logging.DEBUG)
+
+def store_json_elastic_search(json_object):
+    region = 'us-east-1' 
+    service = 'es'
+    credentials = boto3.Session().get_credentials()
+    host = 'https://cloudproj-XXXX.es.us-east-1.aws.found.io/'
+    index = 'violence6'
+    url = host + index + '/doc'
+    headers = {"Content-Type": "application/json"}
+    resp = requests.post(url,auth=('XXXX', 'XXXXXXXX'), data = json.dumps(json_object),headers = headers)
+    print("The response is ",resp.text)
+    print("The type of resp", type(resp.status_code))
+    print("The status code is", resp.status_code)
+    if resp.status_code==200 or resp.status_code==201:
+        print("Coming inside if")
+        return True
+    else:
+        return False
+
+def lambda_handler(event, context):
+    messages = sqsclient.receive_message(QueueUrl=queue_url,MaxNumberOfMessages=1, MessageAttributeNames=['All'])
+    logger.debug(messages)
+    try:
+      message = messages['Messages'][0]
+      logger.debug(message)
+    except KeyError:
+        logger.debug("No message in the queue")
+        return None
+    receipt_handle = message['ReceiptHandle']
+    req_attributes = json.loads(message['Body'])
+    crime_type = req_attributes['crimeType']
+    location = req_attributes['location']
+    date =  req_attributes['date']
+    #date_final = datetime.datetime.strptime(str(date), "%Y-%m-%d").isoformat()
+    date_final = datetime.datetime.strptime(str(date), "%Y-%m-%d")
+    print('The type of date is',type(date_final))
+    date_final = date_final + datetime.timedelta(days=1)
+    date_final = str(date_final).split()[0]+"T"+ str(date_final).split()[1]
+    json_object = {
+                'crimeType': crime_type,
+                'location': location,
+                'date': str(date_final)
+            }
+            
+    print("The json object is: ",json_object)        
+    if store_json_elastic_search(json_object):
+        sqsclient.delete_message(
+                QueueUrl=queue_url,
+                ReceiptHandle=receipt_handle
+            )
+    return {
+        'statusCode': 200,
+        'body': json.dumps('Hello from Lambda!')
+    }
