@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../static/styles.css">
+</head>
+
+<body>
+
+    <div class="topnav">
+        <!-- <a href="welcome.html">Home</a>
+        <a href="search.html">Search</a> -->
+        <a class="active" href="http://127.0.0.1:5000">Home</a>
+        <a target = "_blank" href="https://chatbot-dv.s3.amazonaws.com/chat.html">Chat with expert</a>
+        <a target = "_blank" href="https://XXXXXXXXXXX/s/marketing/goto/e7c79070-7e37-11ed-bdd0-f9d67688dfc8">Analytics</a>
+        
+    </div>   
+
+    <div class="welcome center">NYC Crime Detection and Analysis</div>
+   
+      <div class="feedcontainer">
+
+        <label for="upload"><b>Select Video to Upload and detect violence</b></label>
+        <p>
+            {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                <ul>
+                {% for message in messages %}
+                  <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+              {% endif %}
+            {% endwith %}
+        </p>
+        <br>
+        <br>
+        
+        <form method="post" action="/upload" enctype="multipart/form-data">
+            <dl>
+                <p>
+                    <input type="file" id="myFile" name="file" autocomplete="off" required>
+                </p>
+            </dl>
+            <p>
+                <input type="submit" value="Upload">
+            </p>
+            <br>
+            <br>
+            <hr>
+            <br>
+
+        </form>
+
+        <form method="post" action="/liverecording" >
+          <p>
+          <input type="submit" value="Live Monitoring">
+          </p>
+        </form>
+
+        <!-- <button id="Chatbot-button" class="float-left submit-button" >Click here to chat with us!</button> -->
+        <!-- <input type="file" id="myFile" name="filename" required>
+        <input type="file" name="file" autocomplete="off" required> -->
+        
+        
+      </div>
+      
+      <script type="text/javascript">
+        document.getElementById("Chatbot-button").onclick = function () {
+            location.href = "https://chatbot-dv.s3.amazonaws.com/chat.html";
+        };
+      </script>
+    
+
+</body>

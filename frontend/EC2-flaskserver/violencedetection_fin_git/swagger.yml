@@ -1,0 +1,88 @@
+swagger: '2.0'
+info:
+  title: AI Photo Search
+  description: 'AI Photo Search application, built during the Cloud and Big Data course at Columbia University.'
+  version: 1.0.0
+schemes:
+  - https
+basePath: /v1
+produces:
+  - application/json
+paths:
+  /search:
+    get:
+      summary: photo search method
+      description: |
+        This API takes in a search query as a query parameter and returns zero or more photos that match the search query.
+      operationId: searchPhotos
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          description: the string to be searched
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: search results
+          schema:
+            $ref: '#/definitions/SearchResponse'
+        '403':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /upload:
+    put:
+      summary: photo upload method
+      description: |
+        This API takes in the multi-part body sent to it (ex. a photo) and uploads it to an S3 bucket.
+      operationId: uploadPhoto
+      consumes:
+        - image/png
+        - image/jpg
+        - image/jpeg
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: S3 PUT operation response
+          schema:
+            type: object
+        '403':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+definitions:
+  SearchResponse:
+    type: object
+    properties:
+      results:
+        type: array
+        items:
+          $ref: '#/definitions/Photo'
+  Photo:
+    type: object
+    properties:
+      url:
+        type: string
+      labels:
+        type: array
+        items:
+          type: string
+  Error:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
