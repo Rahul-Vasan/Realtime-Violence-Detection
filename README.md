@@ -99,6 +99,10 @@ https://www.youtube.com/watch?v=F7TO270YHhY
  https://www.abtosoftware.com/blog/violence-detection
  https://zeroeyes.com
  
+ ## Deep Learning MobileNet V2 model:
+ 
+ https://github.com/Rahul-Vasan/Realtime-Violence-Detection/blob/main/frontend/EC2-flaskserver/violencedetection_fin_git/static/newmodel.h5
+ 
  
  <a id='contact'></a>
  
