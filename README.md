@@ -14,7 +14,6 @@ https://www.youtube.com/watch?v=HiT5dHDHZEk
 - [Why use AWS for this project?](#why)
 - [End to End Product Demo](#demo)
 - [Challenges Faced](#challenges)
-- [Future Scope](#futurescope)
 - [References](#references)
 - [Contact Me](#contact) 
 
@@ -76,6 +75,43 @@ The architecture has 3 main features:
 
 https://www.youtube.com/watch?v=F7TO270YHhY
 
+ 
+ <a id='challenges'></a>
+ 
+ ## Challenges
+ 
+ 1) The major challenge was hyperparameter tuning to reduce the false positivity rate to the minimum.
+ 2) Building a highly available alerting mechanism.
+ 3) Leveraging the NLU capabilities of Amazon Lex.
+ 
+ 
+ <a id='references'></a>
+ 
+ ## Data Sources
+ 
+ https://www.kaggle.com/datasets/odins0n/ucf-crime-dataset
+ https://www.kaggle.com/datasets/mohamedmustafa/real-life-violence-situations-dataset
+ https://data.cityofnewyork.us/Public-Safety/NYC-crime/qb7u-rbmr
+
+ ## Similar Products
+ 
+ https://appsource.microsoft.com/en-us/product/web-apps/oddityaibv1590144351772.violence_detection?tab=overview
+ https://www.abtosoftware.com/blog/violence-detection
+ https://zeroeyes.com
+ 
+ 
+ <a id='contact'></a>
+ 
+ ## Contact Me
+
+  Please feel free to contact me for anything in pertinance to the project. 
+  
+| Contact Method |  |
+| --- | --- |
+| Personal Email | rahulvasan30@gmail.com |
+| School Email |   rs7671@nyu.edu |
+| LinkedIn | https://www.linkedin.com/in/rahul-vasan/ |
+ 
 
 
 
