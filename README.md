@@ -58,11 +58,15 @@ The architecture has 3 main features:
 ## Why use AWS for this project?
 
 1)First of all our business logic and the webserver is hosted on EC2. EC2 provides on demand infrastructure that is optimized for deep learning workloads.
-2)Sagemaker takes care of the infrastructure that is required for training and testing heavy deep learning models
-3)The data we mostly deal with are Frames and Videos and S3 proves to be one of the best for blob type storage
-4)The most critical feature of the project is the alert system. It can really make or break the purpose of saving lives. Hence it needs to be highly available and scalable and 
-This is where SNS and SES come to the resque.
+ 
+2)Sagemaker takes care of the infrastructure that is required for training and testing heavy deep learning models.
+ 
+3)The data we mostly deal with are Frames and Videos and S3 proves to be one of the best for blob type storage.
+ 
+4)The most critical feature of the project is the alert system. It can really make or break the purpose of saving lives. Hence it needs to be highly available and scalable and This is where SNS and SES come to the resque.
+ 
 5)Data ingestion into Elasticsearch need not be real time hence we decouple it from business logic and make asynchronous and event driven using SQS and lambda triggers.
+ 
 6)Lex with its NLU capabilities helps us serve the users with analytics by making the entire user experience interactive.
 
 
